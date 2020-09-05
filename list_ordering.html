@@ -1,0 +1,62 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    .sortable-list-item {
+        cursor: move;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(function() {
+        $("#sortable-lists").sortable({
+            stop: function(event, ui) { saveChanges(); }
+        })
+        $("#sortable-lists").disableSelection();
+
+        function saveChanges() {
+            var $num = $('#sortable-lists .sortable-list-item').size();
+            $dataString = "number=" + $num;
+            for ($x = 1; $x <= $num; $x++) {
+                var $catid = $('#sortable-lists .sortable-list-item:nth-child(' + $x + ')').attr('id');
+                $dataString = $dataString + "&order" + $x + "=" + $catid;
+            }
+            $dataString = $dataString + "&_token=2323_jkfsdf}}";
+            console.log($dataString);
+            // $.ajax({
+            // type: "POST",
+            // url: "/list",
+            // data: $dataString
+            // });
+            return false;
+        }
+    });
+
+    /*========================================================
+            backend updated code
+    =========================================================*/
+    $number = $this - > input - > post('number', TRUE);
+    for ($i = 1; $i <= $number; $i++) {#
+        code...$update_id = $_POST['order'.$i];
+        $data['priority'] = $i;
+        $this - > _update($update_id, $data);
+    }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <ul id="sortable-lists" class="list-group">
+            <li class="sortable-list-item list-group-item" id="1">Item 1</li>
+            <li class="sortable-list-item list-group-item" id="2">Item 2</li>
+            <li class="sortable-list-item list-group-item" id="3">Item 3</li>
+            <li class="sortable-list-item list-group-item" id="4">Item 4</li>
+            <li class="sortable-list-item list-group-item" id="5">Item 5</li>
+            <li class="sortable-list-item list-group-item" id="6">Item 6</li>
+            <li class="sortable-list-item list-group-item" id="7">Item 7</li>
+        </ul>
+    </div>
+</body>
